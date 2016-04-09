@@ -1,0 +1,46 @@
+<div ng-controller="noticesSystemIndexController" class="row">
+    <p class="col-md-12">
+        <button type="button" class="btn btn-primary" ng-click="queryList()">刷新</button>
+        <button type="button" class="btn btn-primary" ng-click="readAll()">全部标为已读</button>
+    </p>
+    <div class="col-md-12">
+        <div class="box box-primary ">
+            <div class="box-header with-border">
+                <h3 class="box-title">
+                    系统通知
+                </h3>
+            </div>
+            <div class="box-body">
+                <table class="table table-bordered dataTable">
+                    <thead>
+                    <tr>
+                        <th>通知时间</th>
+                        <th>通知类型</th>
+                        <th>接收角色</th>
+                        <th>通知标题</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="notice in notices" class="{{!notice.isRead?'info':''}}">
+                        <td>{{notice.notifyDatetime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                        <td>{{notice.type}}</td>
+                        <td>{{notice.receiveRole}}</td>
+                        <td>{{notice.title}}</td>
+                        <td>
+                            <button type="button" class="btn btn-primary btn-xs" ng-click="setRead(notice)" ng-show="!notice.isRead">已读</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="box-footer" ng-show="page.totalPage > 1">
+                <pagination current-page="page.currentPage" total-page="page.totalPage"
+                            on-select-page="queryList(page);"></pagination>
+            </div>
+            <div class="overlay hide" ng-show="queryLoading">
+                <i class="fa fa-spinner fa-spin"></i>
+            </div>
+        </div>
+    </div>
+</div>

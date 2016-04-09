@@ -1,0 +1,58 @@
+<div ng-controller="FmallProductIndexController as fmallProductCtl" class="row">
+    <div class="col-md-12">
+        <div class="box box-primary ">
+            <div class="box-header with-border">
+                <h3 class="box-title">
+                    自营产品
+                </h3>
+                <div class="box-tools">
+                    <button class="btn btn-sm btn-success" ng-click="fmallProductCtl.synchProduct()"><i class="fa fa-plus"></i>&nbsp;&nbsp;同步产品
+                    </button>
+                </div>
+            </div>
+            <div class="box-body">
+                <table class="table table-bordered table-hover table-striped dataTable">
+                    <thead>
+                    <tr>
+                        <th>产品编号</th>
+                        <th>产品名称</th>
+                        <th ng-repeat="orderCode in fmallProductCtl.orderCodes" class="{{orderCode.css}}"
+                            ng-click="fmallProductCtl.headSort(orderCode.field);">{{orderCode.title}}
+                        </th>
+                        <th style="width:500px;min-width: 150px;max-width: 500px;">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="product in fmallProductCtl.records">
+                        <td>{{product.productNo}}</td>
+                        <td>{{product.name}}</td>
+                        <td>{{product.statusDescription}}</td>
+                        <td>{{product.shares}}</td>
+                        <td><a href="#/fmall/product/view?id={{product.productExchangeId}}" title="查看详情">
+                            <button type="button" class="btn btn-primary btn-xs">查看</button>
+                        </a>
+                            <button type="button" class="btn btn-primary btn-xs" ng-if="product.ON_LINE_OPERATE" ng-click="fmallProductCtl.changeState(product,'ON_LINE','ON_LINE_OPERATE')">上架</button>
+                            <button type="button" class="btn btn-primary btn-xs" ng-if="product.OFF_LINE_OPERATE" ng-click="fmallProductCtl.changeState(product,'OFF_LINE','OFF_LINE_OPERATE')">下架</button>
+                            <button type="button" class="btn btn-primary btn-xs" ng-if="product.ON_SALE_OPERATE" ng-click="fmallProductCtl.changeSaleState(product,'ON_SALE','ON_SALE_OPERATE')">开始销售</button>
+                            <button type="button" class="btn btn-primary btn-xs" ng-if="product.OFF_SALE_OPERATE" ng-click="fmallProductCtl.changeSaleState(product,'CHANNEL_OFF_SALE','OFF_SALE_OPERATE')">停止销售</button>
+                            <button type="button" class="btn btn-primary btn-xs" ng-if="product.INVEST_OPERATE" ng-click="fmallProductCtl.loan(product)">放款</button>
+                            <button type="button" class="btn btn-primary btn-xs" ng-if="product.REFUND_OPERATE" ng-click="fmallProductCtl.refund(product)">退款</button>
+                            <button type="button" class="btn btn-primary btn-xs" ng-if="product.REPAYMENT_OPERATE" ng-click="fmallProductCtl.repay(product,'REPAYMENT','REPAYMENT_OPERATE')">还本金</button>
+                            <button type="button" class="btn btn-primary btn-xs" ng-if="product.PROFIT_OPERATE" ng-click="fmallProductCtl.repay(product,'PROFIT','PROFIT_OPERATE')">发收益</button>
+                            <button type="button" class="btn btn-primary btn-xs" ng-if="product.OVERDUE_REPAYMENT_OPERATE" ng-click="fmallProductCtl.reserveRepayment(product)">备用金还款</button>
+                            <span class="bg-warning">{{product.message}}</span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="box-footer">
+                <pagination current-page="fmallProductCtl.page.currentPage" total-page="fmallProductCtl.page.totalPage"
+                            on-select-page="fmallProductCtl.queryProductList(page);"></pagination>
+            </div>
+            <div class="overlay" ng-show="queryLoading">
+                <i class="fa fa-spinner fa-spin"></i>
+            </div>
+        </div>
+    </div>
+</div>

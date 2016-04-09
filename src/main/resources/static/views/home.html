@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Matrix Console</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="./webjars/bootstrap/3.3.5/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="./webjars/font-awesome/4.4.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="./webjars/adminlte/2.3.0/dist/css/AdminLTE.min.css"/>
+    <link rel="stylesheet" href="./webjars/datatables-bootstrap/2-20120201/DT_bootstrap.css"/>
+    <link rel="stylesheet" href="./webjars/adminlte/2.3.0/dist/css/skins/skin-blue.min.css"/>
+    <link rel="stylesheet" href="./webjars/bootstrapvalidator/0.4.4/css/bootstrapValidator.css"/>
+    <link rel="stylesheet" href="./webjars/bootstrap-datepicker/1.4.0/css/bootstrap-datepicker.min.css"/>
+    <!-- vendor start -->
+    <script type="text/javascript" src="./webjars/jquery/2.1.4/jquery.min.js"></script>
+    <script type="text/javascript" src="./webjars/jquery-mask-plugin/1.13.4/dist/jquery.mask.min.js"></script>
+    <script type="text/javascript" src="./webjars/bootstrap/3.3.5/js/tab.js"></script>
+    <script type="text/javascript" src="./webjars/bootstrap/3.3.5/js/dropdown.js"></script>
+    <script type="text/javascript" src="./js/date.util.js"></script>
+    <script type="text/javascript" src="./webjars/angularjs/1.4.6/angular.min.js"></script>
+    <script type="text/javascript" src="./webjars/oclazyload/1.0.6/dist/ocLazyLoad.js"></script>
+    <script type="text/javascript" src="./webjars/angular-ui-router/0.2.15/release/angular-ui-router.min.js"></script>
+    <script type="text/javascript" src="./webjars/bootstrap-datepicker/1.4.0/js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript" src="./webjars/bootstrapvalidator/0.4.4/js/bootstrapValidator.min.js"></script>
+    <script type="text/javascript" src="./js/angular.extend.js"></script>
+    <!-- vendor end -->
+    <script type="text/javascript" src="./js/app.js"></script>
+    <script type="text/javascript" src="./js/setting.js"></script>
+    <script type="text/javascript" src="./js/menuController.js"></script>
+    <script type="text/javascript" src="./js/rootController.js"></script>
+</head>
+
+
+<body class="hold-transition skin-blue sidebar-mini" ng-controller="rootController">
+<div class="wrapper">
+    <header class="main-header">
+        <a href="#" class="logo">
+            <span class="logo-mini">Poster</span>
+            <span class="logo-lg">XXXX 广告运营后台</span>
+        </a>
+        <nav class="navbar navbar-static-top" role="navigation">
+            <!--<a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                <span class="sr-only">Toggle navigation</span>
+            </a>-->
+            <!-- 菜单 -->
+            <ul class="nav navbar-nav height-animate" ng-controller="moduleController">
+                <li class="messages-menu" ng-repeat="module in moduleList" ng-class="{active:CUR_MENU_PATH.one_code===module.moduleKey}">
+                    <a href="#" class="dropdown-toggle" ng-click="changeMenu(module.moduleKey);"><span>{{module.moduleName}}</span></a>
+                </li>
+            </ul>
+            <div class="navbar-custom-menu" ng-controller="userController">
+                <ul class="nav navbar-nav">
+                    <li class="tasks-menu">
+                        <a href="#/notices/system/index">
+                            <i class="fa fa-envelope-o"></i>
+                            <span class="label label-success">{{count}}</span>
+                        </a>
+                    </li>
+                    <li class="dropdown user user-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <img src="./img/user2-160x160.jpg" class="user-image" alt="User Image">
+                            <span class="hidden-xs">{{user.name}}</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="user-header">
+                                <img src="./img/user2-160x160.jpg" class="img-circle" alt="User Image">
+
+                                <p>
+                                    {{user.name}}
+                                </p>
+                            </li>
+                            <li class="user-body">
+                                <div class="col-xs-6 text-center">
+                                    <a href="#">账号信息</a>
+                                </div>
+                                <div class="col-xs-6 text-center">
+                                    <a href="#">用户设定</a>
+                                </div>
+                            </li>
+                            <li class="user-footer">
+                                <div class="pull-right">
+                                    <a href="./logout" class="btn btn-default btn-flat">退出</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+        </nav>
+    </header>
+    <aside class="main-sidebar">
+        <section class="sidebar" style="height: auto;">
+            <form action="#" method="get" class="sidebar-form">
+                <div class="input-group">
+                    <input type="text" ng-model="search" name="q" class="form-control" placeholder="产品名称/用户名/订单号">
+              <span class="input-group-btn">
+                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                </button>
+              </span>
+                </div>
+            </form>
+            <ul class="sidebar-menu" ng-controller="menuController">
+                <li class="treeview" ng-class="{active:m.href.indexOf(CUR_MENU_PATH.two_code)!=-1}" ng-repeat="m in menus.list">
+                    <a ng-href="#{{m.href}}">
+                        <i class="{{m.icon}}"></i> <span>{{m.text}}</span>
+                    </a>
+                </li>
+            </ul>
+        </section>
+    </aside>
+    <div class="content-wrapper">
+        <div class="content body" ng-style="{'min-height':minHeight} ">
+            <div ui-view>欢迎使用"下一代金融网络"控制台</div>
+        </div>
+    </div>
+</div>
+<div my-confirm config="doConfirmCfg"></div>
+<div my-confirm config="confirmCfg"></div>
+<div id="infodialog" class="modal" style="background: rgba(0,0,0,0);">
+    <div class="modal-dialog" style="position:absolute; top:35%; left:40%;">
+        <div class="box box-warning" style="display: inline-block;width: auto;min-width: 300px;text-align: left;">
+            <div class="box-header with-border"><h3 class="box-title">提示</h3>
+
+                <div class="box-tools">
+                    <button class="btn btn-box-tool" onclick="poss.info.hide();"><i class="fa fa-times"></i></button>
+                </div>
+            </div>
+            <div class="box-body" id="infomsg" style="font-weight:bold;"></div>
+        </div>
+    </div>
+</div>
+<div id="noticesInfoDialog" ng-show="isShowNoticesInfo">
+    <div class="modal-dialog" style="position:absolute; right:0px; bottom: 0px; width: 300px; height: 100px;">
+        <div class="box box-warning" style="display: inline-block;width: auto;width: 300px; height:100px; text-align: left;">
+            <div class="box-header with-border"><h3 class="box-title">系统通知</h3>
+                <div class="box-tools">
+                    <button class="btn btn-box-tool" ng-click="hideNoticesInfo()"><i class="fa fa-times"></i></button>
+                </div>
+            </div>
+            <div class="box-body" id="noticesInfoMsg" style="font-weight:bold;">您有{{countNew}}条新通知</div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

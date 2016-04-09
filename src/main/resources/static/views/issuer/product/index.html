@@ -1,0 +1,83 @@
+<div ng-controller="productIndexController" class="row">
+    <div class="col-md-12">
+        <div class="box box-primary ">
+            <div class="box-header with-border">
+                <h3 class="box-title">
+                    自营产品
+                </h3>
+
+                <div class="box-tools">
+                    <a class="btn btn-sm btn-success" href="#/issuer/product/form"><i class="fa fa-plus"></i>&nbsp;&nbsp;添加自营产品
+                    </a>
+                </div>
+            </div>
+            <div class="box-body">
+                <table class="table table-bordered table-hover table-striped dataTable">
+                    <thead>
+                    <tr>
+                        <th>产品编号</th>
+                        <th>产品名称</th>
+                        <th ng-repeat="orderCode in orderCodes" class="{{orderCode.css}}"
+                            ng-click="headOrder(orderCode.field);">{{orderCode.title}}
+                        </th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="product in records">
+                        <td>{{product.productNo}}</td>
+                        <td>{{product.name}}</td>
+                        <td>{{product.status}}</td>
+                        <td>{{product.amount}}</td>
+                        <td>
+                            <a href="#/issuer/product/view?id={{product.id}}" class="btn btn-primary btn-xs">详情</a>
+                            <span ng-repeat="operation in product.operations">
+                            <button class="btn btn-primary btn-xs" ng-click="operateConfirm(operation, product.id)">
+                                {{operations[operation]}}
+                            </button>
+                            </span>
+                            {{product.prompt}}
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="box-footer" ng-show="page.totalPage > 1">
+                <pagination current-page="page.currentPage" total-page="page.totalPage"
+                            on-select-page="queryProductList(page);"></pagination>
+            </div>
+            <div class="overlay hide" ng-show="queryLoading">
+                <i class="fa fa-spinner fa-spin"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- 提交对话框 -->
+    <div id="operateConfirmDialog" class="modal" style="background: rgba(0,0,0,0);">
+        <div class="modal-dialog" style="position:absolute; top:40%; left:30%;">
+            <div class="box box-warning" style="display: inline-block;width: auto;min-width: 500px;text-align: left;">
+                <div class="box-header with-border"><h3 class="box-title">提示</h3>
+
+                    <div class="box-tools">
+                        <button class="btn btn-box-tool" ng-click="closeOperateConfirmDialog()"><i class="fa fa-times"></i></button>
+                    </div>
+                </div>
+                <div class="box-body" id="infomsg" style="font-weight:bold;">
+                    <span ng-show="!(operateAction.operation == 'ESTABLISH' || operateAction.operation == 'ESTABLISH_ADVANCE')">{{operateMsg}}</span>
+                    <form ng-show="operateAction.operation == 'ESTABLISH' || operateAction.operation == 'ESTABLISH_ADVANCE'" class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">日期:</label>
+                            <div class="col-sm-10">
+                                <input class="form-control form_datetime" readonly ng-model="params_date" placeholder="请选择日期">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" ng-click="closeOperateConfirmDialog()">关闭</button>
+                    <button type="button" class="btn btn-primary" ng-click="operate()">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

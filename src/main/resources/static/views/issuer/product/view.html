@@ -1,0 +1,199 @@
+<div ng-controller="productViewController">
+    <div class="row">
+        <div ng-class="col-md-12">
+            <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#tab_1" data-toggle="tab">产品详情</a></li>
+                    <li class=""><a href="#tab_2" data-toggle="tab">产品资产及持有人</a></li>
+                    <li class=""><a href="#tab_3" data-toggle="tab">产品订单</a></li>
+                    <li class=""><a href="#tab_4" data-toggle="tab">关键时间轴</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tab_1">
+                        <div class="row">
+                            <form id="productDetailForm" class="form-horizontal" onsubmit="return false">
+                                <input type="hidden" ng-model="product.id">
+                                <p class="col-md-12">
+                                    <a class="btn btn-primary" href="#/issuer/product/form?id={{id}}" ng-show="product.status=='DRAFT'">编辑</a>
+                                    <button class="btn btn-primary" ng-click="issue()" ng-show="product.status=='DRAFT'">发布</button>
+                                    <a class="btn btn-primary" href="#/issuer/product/index">返回产品列表</a>
+                                </p>
+                                <div class="col-md-12">
+                                    <div class="box box-info">
+                                        <div class="box-header with-border">
+                                            <h3 class="box-title">基本信息</h3>
+                                        </div>
+                                        <div class="box-body">
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">产品名称</label>
+                                                <div class="col-sm-4">
+                                                    <input class="form-control" ng-model="product.name" name="product_name" placeholder="请输入3-16个中英文字符" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">产品编号</label>
+                                                <div class="col-sm-4">
+                                                    <input class="form-control" ng-model="product.productNo" name="product_productNo" placeholder="请输入3-16个中英文字符" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">产品属性</label>
+                                                <div class="col-sm-4">
+                                                    <select class="form-control" ng-model="product.productSpecies" name="product_productSpecies" disabled>
+                                                        <option></option>
+                                                        <option>股权产品</option>
+                                                        <option>债权产品</option>
+                                                        <option>货币市场产品</option>
+                                                        <option>另类投资品</option>
+                                                        <option>金融衍生品</option>
+                                                        <option>资产组合</option>
+                                                        <option>其它类金融产品</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">合格投资者</label>
+                                                <div class="col-sm-4">
+                                                    <select class="form-control" ng-model="product.prdUserType" name="product_prdUserType" disabled>
+                                                        <option value=""></option>
+                                                        <option value="PERSONAL">个人</option>
+                                                        <option value="ORGANIZATION">机构</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">产品描述</label>
+                                                <div class="col-sm-4">
+                                                    <textarea class="form-control" ng-model="product.description" name="product_description" rows="3" placeholder="" disabled></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="box box-info">
+                                        <div class="box-header with-border">
+                                            <h3 class="box-title">产品收益率</h3>
+                                        </div>
+                                        <div class="box-body">
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">预期年化收益率</label>
+                                                <div class="col-sm-4">
+                                                    <div class="input-group">
+                                                        <input class="form-control" ng-model="product.expectAnnualReturnRate" name="product_expectAnnualReturnRate" placeholder="请输入两位小数" disabled>
+                                                        <span class="input-group-addon">%</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">收益率折算方式</label>
+                                                <div class="col-sm-4">
+                                                    <div class="radio">
+                                                        <label>
+                                                            <input type="radio" ng-model="product.annualizationPrinciple" name="product_annualizationPrinciple" value="PRINCIPLE_365" disabled>按一年365日计算
+                                                        </label>
+                                                        <label>
+                                                            <input type="radio" ng-model="product.annualizationPrinciple" name="product_annualizationPrinciple" value="PRINCIPLE_360" disabled>按一年360日计算
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="box box-info">
+                                        <div class="box-header with-border">
+                                            <h3 class="box-title">产品成立条件</h3>
+                                        </div>
+                                        <div class="box-body">
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">产品募集总份额</label>
+                                                <div class="col-sm-4">
+                                                    <div class="input-group">
+                                                        <input class="form-control" ng-model="product.shares" name="product_shares" placeholder="整数份额" disabled>
+                                                        <span class="input-group-addon">份</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">单位净值</label>
+                                                <div class="col-sm-4">
+                                                    <div class="input-group">
+                                                        <input class="form-control" ng-model="product.nav" name="product_nav" placeholder="? 整数金额" disabled>
+                                                        <span class="input-group-addon">元</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="box box-info">
+                                        <div class="box-header with-border">
+                                            <h3 class="box-title">产品关键时间点</h3>
+                                        </div>
+                                        <div class="box-body">
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">产品募集开始日</label>
+                                                <div class="col-sm-4">
+                                                    <input class="form-control" ng-model="product.issuanceStart" name="product_issuanceStart" placeholder="" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">产品募集结束日</label>
+                                                <div class="col-sm-4">
+                                                    <input class="form-control" ng-model="product.issuanceEnd" name="product_issuanceEnd" placeholder="" disabled>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    * 募集结束日尚未募集足额，系统自动结束募集，产品只能进入募集失败退款流程。
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">存续期时长</label>
+                                                <div class="col-sm-4">
+                                                    <div class="input-group">
+                                                        <input class="form-control" ng-model="product.prdPeriod" name="product_prdPeriod" placeholder="请输入天数" disabled>
+                                                        <span class="input-group-addon">天</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="tab_2">
+                        产品资产及持有人<br/>
+                    </div>
+                    <div class="tab-pane" id="tab_3">
+                        <p>产品订单</p>
+                    </div>
+                    <div class="tab-pane" id="tab_4">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <ul class="timeline">
+                                    <li ng-repeat-start="timeRecord in timeLine_new" class="time-label">
+                                        <span class="bg-red">{{timeRecord.operateTime}}</span>
+                                    </li>
+                                    <li ng-repeat-end ng-repeat="events in timeRecord.eventss">
+                                        <i class="fa fa-envelope bg-blue"></i>
+
+                                        <div class="timeline-item">
+                                            <h3 class="timeline-header"><a href="#">{{events}}</a></h3>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <i class="fa fa-clock-o bg-gray"></i>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

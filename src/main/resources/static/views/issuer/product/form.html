@@ -1,0 +1,157 @@
+<div ng-controller="productFormController" class="row">
+    <form id="productForm" class="form-horizontal" onsubmit="return false">
+        <input type="hidden" ng-model="product.id">
+        <p class="col-md-12">
+            <button type="submit" class="btn btn-primary" ng-click="save()" ng-show="product.status=='DRAFT' || !product.status">保存</button>
+            <button type="submit" class="btn btn-primary" ng-click="issue()" ng-show="product.status=='DRAFT' || !product.status">发布</button>
+            <a class="btn btn-primary" href="#/issuer/product/index">返回产品列表</a>
+        </p>
+        <div class="col-md-12">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">基本信息</h3>
+                </div>
+                <div class="box-body">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">产品名称</label>
+                        <div class="col-sm-4">
+                            <input class="form-control" ng-model="product.name" name="product_name" placeholder="请输入3-16个中英文字符" data-bv-notempty data-bv-notempty-message="不能为空">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">产品编号</label>
+                        <div class="col-sm-4">
+                            <input class="form-control" ng-model="product.productNo" name="product_productNo" placeholder="请输入3-16个中英文字符" data-bv-notempty data-bv-notempty-message="不能为空">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">产品属性</label>
+                        <div class="col-sm-4">
+                            <select class="form-control" ng-model="product.productSpecies" name="product_productSpecies">
+                                <option></option>
+                                <option>股权产品</option>
+                                <option>债权产品</option>
+                                <option>货币市场产品</option>
+                                <option>另类投资品</option>
+                                <option>金融衍生品</option>
+                                <option>资产组合</option>
+                                <option>其它类金融产品</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">合格投资者</label>
+                        <div class="col-sm-4">
+                            <select class="form-control" ng-model="product.prdUserType" name="product_prdUserType">
+                                <option value=""></option>
+                                <option value="PERSONAL">个人</option>
+                                <option value="ORGANIZATION">机构</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">产品描述</label>
+                        <div class="col-sm-4">
+                            <textarea class="form-control" ng-model="product.description" name="product_description" rows="3" placeholder="" data-bv-notempty data-bv-notempty-message="不能为空"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">产品收益率</h3>
+                </div>
+                <div class="box-body">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">预期年化收益率</label>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <input class="form-control" ng-model="product.expectAnnualReturnRate" name="product_expectAnnualReturnRate" placeholder="请输入两位小数" data-bv-notempty data-bv-notempty-message="不能为空" data-bv-regexp data-bv-regexp-regexp="^[0-9]+([.]{1}[0-9]{1,2})?$" data-bv-regexp-message="请输入正数，精确到两位小数">
+                                <span class="input-group-addon">%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">收益率折算方式</label>
+                        <div class="col-sm-4">
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" ng-model="product.annualizationPrinciple" name="product_annualizationPrinciple" value="PRINCIPLE_365" ng-checked="true">按一年365日计算
+                                </label>
+                                <label>
+                                    <input type="radio" ng-model="product.annualizationPrinciple" name="product_annualizationPrinciple" value="PRINCIPLE_360">按一年360日计算
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">产品成立条件</h3>
+                </div>
+                <div class="box-body">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">产品募集总份额</label>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <input class="form-control" ng-model="product.shares" name="product_shares" placeholder="整数份额" data-bv-notempty data-bv-notempty-message="不能为空" data-bv-regexp data-bv-regexp-regexp="^[0-9]*[1-9][0-9]*$" data-bv-regexp-message="请输入正整数">
+                                <span class="input-group-addon">份</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">单位净值</label>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <input class="form-control" ng-model="product.nav" name="product_nav" placeholder="¥ 整数金额" data-bv-notempty data-bv-notempty-message="不能为空" data-bv-regexp data-bv-regexp-regexp="^[0-9]*[1-9][0-9]*$" data-bv-regexp-message="请输入正整数">
+                                <span class="input-group-addon">元</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">产品关键时间点</h3>
+                </div>
+                <div class="box-body">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">产品募集开始日</label>
+                        <div class="col-sm-4">
+                            <input class="form-control form_datetime" readonly ng-model="product.issuanceStart" name="product_issuanceStart">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">产品募集结束日</label>
+                        <div class="col-sm-4">
+                            <input class="form-control form_datetime" readonly ng-model="product.issuanceEnd" name="product_issuanceEnd">
+                        </div>
+                        <div class="col-sm-6">
+                            * 募集结束日尚未募集足额，系统自动结束募集，产品只能进入募集失败退款流程。
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">存续期时长</label>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <input class="form-control" ng-model="product.prdPeriod" name="product_prdPeriod" placeholder="请输入天数" data-bv-notempty data-bv-notempty-message="不能为空" data-bv-regexp data-bv-regexp-regexp="^[0-9]*[1-9][0-9]*$" data-bv-regexp-message="请输入正整数">
+                                <span class="input-group-addon">天</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p class="col-md-12">
+            <button type="submit" class="btn btn-primary" ng-click="save()" ng-show="product.status=='DRAFT' || !product.status">保存</button>
+            <button type="submit" class="btn btn-primary" ng-click="issue()" ng-show="product.status=='DRAFT' || !product.status">发布</button>
+        </p>
+    </form>
+</div>

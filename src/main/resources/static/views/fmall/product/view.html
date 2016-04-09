@@ -1,0 +1,130 @@
+<div ng-controller="fmallProductViewController">
+    <div class="row">
+        <div ng-class="col-md-12">
+            <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#tab_1" data-toggle="tab">产品详情</a></li>
+                    <li class=""><a href="#tab_2" data-toggle="tab">产品资产及持有人</a></li>
+                    <li class=""><a href="#tab_3" data-toggle="tab">产品订单</a></li>
+                    <li class=""><a href="#tab_4" data-toggle="tab">关键时间轴</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tab_1">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="box box-info">
+                                    <div class="box-header">
+                                        <h3 class="box-title">产品名称和发行人</h3>
+                                    </div>
+                                    <div class="box-body">
+                                        <div class="row">
+                                            <div class="col-md-4">产品名称</div>
+                                            <div class="col-md-8">{{product.name}}</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">产品发行人</div>
+                                            <div class="col-md-8">产品发行人</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="box box-info">
+                                    <div class="box-header">
+                                        <h3 class="box-title">基本信息</h3>
+                                    </div>
+                                    <div class="box-body">
+                                        <div class="row">
+                                            <div class="col-md-4">产品属性</div>
+                                            <div class="col-md-8">{{product.productSpecies}}</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">合格投资者</div>
+                                            <div class="col-md-8">{{product.prdUserType}}</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">产品描述</div>
+                                            <div class="col-md-8">{{product.description}}</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">产品文档</div>
+                                            <div class="col-md-8">产品文档</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="box box-info">
+                                    <div class="box-header">
+                                        <h3 class="box-title">产品收益率</h3>
+                                    </div>
+                                    <div class="box-body">
+                                        <div class="row">
+                                            <div class="col-md-4">预期年化收益率</div>
+                                            <div class="col-md-8">{{product.expectAnnualReturnRate}}</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">收益率折算方式</div>
+                                            <div class="col-md-8">{{product.annualizationPrinciple}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="box box-info">
+                                    <div class="box-header">
+                                        <h3 class="box-title">产品成立条件</h3>
+                                    </div>
+                                    <div class="box-body">
+                                        <div class="row">
+                                            <div class="col-md-4">产品募集总金额</div>
+                                            <div class="col-md-8">{{product.shares}}</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">产品募集总份额</div>
+                                            <div class="col-md-8">{{product.annualizationPrinciple}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="tab_2">
+                        产品资产及持有人<br/>
+                    </div>
+                    <div class="tab-pane" id="tab_3">
+                        <p>产品订单</p>
+                    </div>
+                    <div class="tab-pane" id="tab_4">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <ul class="timeline">
+                                    <li ng-repeat-start="timeRecord in timeLine_new" class="time-label">
+                                        <span class="bg-red">{{timeRecord.operateTimeStr}}</span>
+                                    </li>
+                                    <li ng-repeat-end ng-repeat="events in timeRecord.eventss">
+                                        <i class="fa fa-envelope bg-blue"></i>
+
+                                        <div class="timeline-item">
+                                            <h3 class="timeline-header"><a href="#">{{events}}</a></h3>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <i class="fa fa-clock-o bg-gray"></i>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

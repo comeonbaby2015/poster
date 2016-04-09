@@ -1,0 +1,56 @@
+var rs = {
+    "success": true,
+    "message": null,
+    "redirect": null,
+    "data": {
+        "timeLine": [{
+            "matrixProductId": "ff80808150a8e7db0150a8e9ee730000",
+            "operateTime": 1445942945000,
+            "events": "渠道上架",
+            "createdDate": 1445942945000,
+            "updatedDate": 1445942945000,
+            "availability": null,
+            "id": 62
+        }, {
+            "matrixProductId": "ff80808150a8e7db0150a8e9ee730000",
+            "operateTime": 1445942949000,
+            "events": "开始募集",
+            "createdDate": 1445942949000,
+            "updatedDate": 1445942949000,
+            "availability": null,
+            "id": 63
+        }, {
+            "matrixProductId": "ff80808150a8e7db0150a8e9ee730000",
+            "operateTime": 1445943002000,
+            "events": "发行发请款",
+            "createdDate": 1445943002000,
+            "updatedDate": 1445943002000,
+            "availability": null,
+            "id": 64
+        }, {
+            "matrixProductId": "ff80808150a8e7db0150a8e9ee730000",
+            "operateTime": 1445943116000,
+            "events": "逾期还款",
+            "createdDate": 1445943116000,
+            "updatedDate": 1445943116000,
+            "availability": null,
+            "id": 66
+        }, {
+            "matrixProductId": "ff80808150a8e7db0150a8e9ee730000",
+            "operateTime": 1445943116000,
+            "events": "发行方发放收益成功通知",
+            "createdDate": 1445943116000,
+            "updatedDate": 1445943116000,
+            "availability": null,
+            "id": 67
+        }, {
+            "matrixProductId": "ff80808150a8e7db0150a8e9ee730000",
+            "operateTime": 1445943116000,
+            "events": "发行方还款成功通知",
+            "createdDate": 1445943116000,
+            "updatedDate": 1445943116000,
+            "availability": null,
+            "id": 68
+        }]
+    }
+};

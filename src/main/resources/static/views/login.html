@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Matrix Console</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="./webjars/bootstrap/3.3.5/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="./webjars/font-awesome/4.4.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="./webjars/adminlte/2.3.0/dist/css/AdminLTE.min.css"/>
+    <link rel="stylesheet" href="./webjars/datatables-bootstrap/2-20120201/DT_bootstrap.css"/>
+    <link rel="stylesheet" href="./webjars/adminlte/2.3.0/dist/css/skins/skin-blue.min.css"/>
+    <script type="text/javascript" src="./webjars/jquery/2.1.4/jquery.min.js"></script>
+    <script type="text/javascript" src="./js/login.js"></script>
+</head>
+<body class="hold-transition login-page">
+<div class="login-box" style="position:absolute; top:15%; left:40%;">
+    <div class="login-box-body">
+        <div class="login-logo">
+            登陆
+        </div>
+        <form>
+            <div class="form-group has-feedback">
+                <input id="input_name" type="text" class="form-control" placeholder="用户名">
+                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input id="input_password" type="password" class="form-control" placeholder="密码">
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <button id="btn_login" type="button" class="btn btn-primary btn-block btn-flat">登陆</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div id="infodialog" class="modal" style="background: rgba(0,0,0,0);">
+    <div class="modal-dialog" style="position:absolute; top:35%; left:40%;">
+        <div class="box box-warning" style="display: inline-block;width: auto;min-width: 300px;text-align: left;">
+            <div class="box-header with-border"><h3 class="box-title">提示</h3>
+
+                <div class="box-tools">
+                    <button class="btn btn-box-tool" onclick="$('#infodialog').hide();"><i class="fa fa-times"></i></button>
+                </div>
+            </div>
+            <div class="box-body" id="infomsg" style="font-weight:bold;"></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

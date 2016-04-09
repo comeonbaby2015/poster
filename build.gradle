@@ -1,0 +1,43 @@
+group 'com.tang'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'spring-boot'
+
+buildscript {
+    repositories {
+        maven { url "http://maven.oschina.net/content/groups/public" }
+        maven { url "http://repo.spring.io/snapshot" }
+        maven { url "http://repo.spring.io/milestone" }
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.6.RELEASE")
+    }
+}
+
+repositories {
+    maven { url "http://maven.oschina.net/content/groups/public" }
+    maven { url "http://repo.spring.io/snapshot" }
+    maven { url "http://repo.spring.io/milestone" }
+    mavenCentral()
+}
+
+dependencies {
+    //Webjars
+    compile 'org.webjars:bootstrap:3.3.5'
+    compile 'org.webjars:font-awesome:4.4.0'
+    compile 'org.webjars:jquery:2.1.4'
+    compile 'org.webjars:bootstrap-datepicker:1.4.0'
+    compile 'org.webjars.bower:oclazyload:1.0.6'
+    compile 'org.webjars.bower:adminlte:2.3.0'
+    compile 'org.webjars:datatables-bootstrap:2-20120202-2'
+    compile 'org.webjars:angularjs:1.4.6'
+    compile 'org.webjars.bower:angular-ui-router:0.2.15'
+    compile 'org.webjars.bower:jquery-mask-plugin:1.13.4'
+    compile 'org.webjars:bootstrapvalidator:0.4.4'
+
+    compile("org.springframework.boot:spring-boot-starter-web:1.2.6.RELEASE")
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
